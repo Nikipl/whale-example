@@ -4,6 +4,8 @@ capabilities:
   - rpc
 process:
   - name: suggestion
+    # correlation свойство типа String которое должно быть у каждого события
+    # используется чтобы направлять события к конкретному инстансу процесса
     correlation: receiptId
     events:
       - evo.receipt.opened
