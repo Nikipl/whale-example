@@ -1,11 +1,11 @@
-val storage = require('storage')
-val inventory = require('inventory')
-val rpc = require('rpc')
+var storage = require('storage')
+var inventory = require('inventory')
+var rpc = require('rpc')
 
 function handleEvent(event, correlationId) {
-  val receiptId = correlationId
-  val state = storage.get("suggestion-process-"+receiptId)
-  val newState = processEvent(event, state)
+  var receiptId = correlationId
+  var state = storage.get("suggestion-process-"+receiptId)
+  var newState = processEvent(event, state)
   storage.set("suggestion-process-"+receiptId, newState)
 }
 
@@ -17,8 +17,8 @@ function processEvent(event, state) {
       if (state.finished) {
         state
       } else {
-        val nextState = state.addItem(event.productId)
-        val suggestions = rpc.call("getSuggestions")({
+        var nextState = state.addItem(event.productId)
+        var suggestions = rpc.call("getSuggestions")({
           receiptId: event.receiptId
           items: nextState.items
         })
@@ -26,8 +26,8 @@ function processEvent(event, state) {
         nextState
       }
     case 'evo.receipt.productRemoved':
-      val nextState = state.removeItem(event.productId)
-      val suggestions = rpc.call("getSuggestions")({
+      var nextState = state.removeItem(event.productId)
+      var suggestions = rpc.call("getSuggestions")({
         receiptId: event.receiptId
         items: nextState.items
       })
