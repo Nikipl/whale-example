@@ -1,0 +1,16 @@
+process:
+  - name: suggestion
+    correlation: receiptId
+    events:
+      - evo.receipt.opened
+      - evo.receipt.productAdded
+      - evo.receipt.productRemoved
+      - app.suggestion.used
+      - evo.receipt.closed
+    behavior: suggestionProcess.js
+flow:
+  - name: suggestion
+    moment: evo.receipt.item.fix
+    point: before
+    behavior: beforReceiptFixed.js
+    
