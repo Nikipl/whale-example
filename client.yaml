@@ -1,3 +1,7 @@
+capabilities:
+  - inventory
+  - storage
+  - rpc
 process:
   - name: suggestion
     correlation: receiptId
@@ -7,10 +11,12 @@ process:
       - evo.receipt.productRemoved
       - app.suggestion.used
       - evo.receipt.closed
-    behavior: suggestionProcess.js
+    behavior: suggestion-process.js
 flow:
   - name: suggestion
     moment: evo.receipt.item.fix
     point: before
-    behavior: beforReceiptFixed.js
-    
+    behavior: beforeReceiptFixed.js
+view:
+  - name: suggestions
+    source: suggestionListView.html
