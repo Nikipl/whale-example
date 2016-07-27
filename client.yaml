@@ -18,7 +18,7 @@ flow:
   - name: suggestion
     moment: evo.receipt.item.fix
     point: before
-    behavior: beforeReceiptFixed.js
+    behavior: before-receipt-fixed.js
 view:
   - name: suggestions
     source: suggestionListView.html
