@@ -1,5 +1,5 @@
 var storage = require('storage')
-var inventory
+var inventory = require('inventory')
 
 function handleMoment(receipt, navigation) {
   var suggestion = storage.get("receipt-suggestions-"+receipt.id)
@@ -14,5 +14,4 @@ function handleMoment(receipt, navigation) {
   } else {
     navigation.pushNext
   }
-
 }
