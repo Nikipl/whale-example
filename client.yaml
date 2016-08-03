@@ -16,9 +16,9 @@ process:
     behavior: suggestion-process.js
 flow:
   - name: suggestion
-    moment: evo.receipt.item.fix
+    moment: evo.receipt.items.fix
     point: before
     behavior: before-receipt-fixed.js
 view:
   - name: suggestions
-    source: suggestionListView.html
+    source: suggestion-list-view.html
