@@ -1,7 +1,8 @@
 var storage = require('storage')
 var inventory = require('inventory')
 
-function handleMoment(receipt, navigation) {
+function handleMoment(context, navigation) {
+  var receipt = context.receipt
   var suggestion = storage.get("receipt-suggestions-"+receipt.id)
   var products =
     suggestion.products.map(productId => inventory.getProduct(productId)).filter(_.available)
