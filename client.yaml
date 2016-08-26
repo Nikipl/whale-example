@@ -22,4 +22,9 @@ flow:
     behavior: before-receipt-fixed.js
 view:
   - name: suggestions
-    source: suggestion-list-view.html
+    dir: suggestion-list # базовая директория
+    source: view.html
+    scripts: # список скриптов которые должны быть подключены
+      - suggestion-list-view.js
+    styles: # список стилей которые должны быть подключены
+      - *.css # может подключить все файлы

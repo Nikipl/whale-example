@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+  <head>
+    <script type="text/javascript">
+      var context = { // этот объект генерится из Java
+        data: { // данные которые были переданы при вызове метода navigation.push
+          receipt: function {
+            this.products = {
+              'ytrxv-dfdg4-kjh' : 1,
+              'poiml-79kjh-rys' : 1,
+              'hyt9c-gfsfd-iuo' : 1,
+              'cvxxv-jgwf6-7fh' : 2,
+            };
+            this.add = function(id) {
+              this.products[id] = this.products[id] || 0;
+              this.products[id]++;
+            };
+            this.remove = function(id) {
+              this.products[id]--;
+              if (this.products[id] <= 0) {
+              delete this.products[id];
+              }
+            };
+          },
+          suggestions: [
+            { id : 'chesnochek', name : 'Чесночек' },
+            { id : 'hlebywek', name : 'Хлебушек' },
+            { id : 'ogur4iki', name : 'Соленые огурчики' },
+            { id : 'saltce', name : 'Сало' }
+          ]
+        },
+        navigation = { // класс для работы с навигацией
+          pushNext: function() {}
+        }
+      }
+    </script>
+
+    <!-- Это вставляется исходя из манифетса -->
+    <script type="text/javascript" src="suggestion-list-view.js" />
+
+    <!-- Это вставляется исходя из манифетса -->
+    <link rel="stylesheet" type="text/css" href="suggestion-list-view.css">
+  </head>
+  <body>
+    <div id="root"></div> <!-- Этот div предоставляют партнеры-->
+  </body>
+</html>
