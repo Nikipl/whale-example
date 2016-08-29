@@ -1,26 +1,28 @@
+version: 1
+
 capabilities:
   - inventory
   - storage
-  - rpc
+  - http
   - event-bus
-process:
+
+daemons:
   - name: suggestion
-    # correlation свойство типа String которое должно быть у каждого события
-    # используется чтобы направлять события к конкретному инстансу процесса
-    correlation: receiptId
     events:
       - evo.receipt.opened
       - evo.receipt.productAdded
       - evo.receipt.productRemoved
-      - app.suggestion.used
       - evo.receipt.closed
-    behavior: suggestion-process.js
-flow:
+      - app.suggestion.used
+    behavior: suggestion-daemon.js
+
+ui-plugins:
   - name: suggestion
-    moment: evo.receipt.items.fix
+    moment: evo.receipt.items.fixed
     point: before
     behavior: before-receipt-fixed.js
-view:
+
+views:
   - name: suggestions
     dir: suggestion-list # базовая директория
     source: view.html
