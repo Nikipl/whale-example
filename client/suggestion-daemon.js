@@ -9,6 +9,18 @@ function handleEvent(event) {
   storage.set("suggestion-process-"+receiptId, newState)
 }
 
+function generateSuggestions(receiptId, items) {
+  var response = http.send({
+    method : "POST",
+    path : "suggestion",
+    body : {
+      receiptId : receiptId,
+      items: items
+    }
+  })
+  return response.body;
+}
+
 function processEvent(event, state) {
   switch (event.type) {
     case 'evo.receipt.opened':
@@ -18,33 +30,21 @@ function processEvent(event, state) {
         return state;
       } else {
         var nextState = state.addItem(event.productId)
-        var reponse = http.send({
-          method : "POST", // default method
-          path : "suggestion",
-          body : {
-            receiptId: event.receiptId,
-            items: nextState.items
-          }
-        })
-        var suggestions = response.body;
+        var suggestions = generateSuggestions(event.receiptId, nextState.items);
         storage.set("receipt-suggestions-"+event.receiptId, suggestions)
         return nextState;
       }
     case 'evo.receipt.productRemoved':
-      var nextState = state.removeItem(event.productId)
-      var response = http.send({
-        method : "POST",
-        path : "suggestion",
-        body : {
-          receiptId: event.receiptId,
-          items: nextState.items
-        }
-      })
-      var suggestions = response.body
-      storage.set("receipt-suggestions-"+event.receiptId, suggestions)
-      return nextState
+      if (state.finished) {
+        return state;
+      } else {
+        var nextState = state.removeItem(event.productId)
+        var suggestions = generateSuggestions(event.receiptId, nextState.items);
+        storage.set("receipt-suggestions-"+event.receiptId, suggestions)
+        return nextState
+      }
     case 'app.suggestion.used':
-      state.markAsUsed
+      return state.markAsUsed;
     case 'evo.receipt.closed':
       http.send({
         method : "POST",
@@ -54,6 +54,6 @@ function processEvent(event, state) {
           items: state.items
         }
       })
-      state
+      return state;
   }
 }
