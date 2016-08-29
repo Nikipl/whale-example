@@ -10,7 +10,7 @@ capabilities:
 endpoints:
   http: # smart terminal requests
     default: # {any-method} http://api.mintwhale.ru/v1/{any-path}
-        url: http://api.mintwhale.ru/v1
+        url: https://api.kassa.mintwhale.ru
         auth:
           type: basic
           login: user.settings.api.login

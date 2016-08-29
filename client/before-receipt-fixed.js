@@ -5,10 +5,12 @@ function handleMoment(context, navigation) {
   var receipt = context.receipt
   var suggestion = storage.get("receipt-suggestions-"+receipt.id)
   var products =
-    suggestion.products.map(productId => inventory.getProduct(productId)).filter(_.available)
+    suggestion.products
+    .map(productId => inventory.getProduct(productId))
+    .filter(p => p.isAvailable)
 
   if (product.length > 0) {
-    navigation.push("suggestions", {
+    navigation.pushView("suggestions", {
       products: products,
       receipt: receipt
     })

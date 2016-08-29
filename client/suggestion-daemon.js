@@ -12,7 +12,7 @@ function handleEvent(event) {
 function generateSuggestions(receiptId, items) {
   var response = http.send({
     method : "POST",
-    path : "suggestion",
+    path : "suggestions",
     body : {
       receiptId : receiptId,
       items: items
