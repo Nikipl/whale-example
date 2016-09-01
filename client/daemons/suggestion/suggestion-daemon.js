@@ -19,7 +19,8 @@ function State(items, used) {
 
 function handleEvent(event) {
   var receiptId = event.receiptId;
-  var state = storage.get("suggestion-process-"+receiptId) ?: new State([], false);
+  var savedState = storage.get("suggestion-process-"+receiptId);
+  var state = savedState || new State([], false);
   var newState = processEvent(event, state)
   storage.set("suggestion-process-"+receiptId, newState)
 }
