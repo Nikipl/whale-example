@@ -2,9 +2,24 @@ var storage = require('storage');
 var inventory = require('inventory');
 var http = require('http');
 
+
+function State(items, used) {
+  this.getItems = items
+  this.isUsed = used
+  this.addItem = function (item) {
+    return new State(items + item, used);
+  }
+  this.removeItem = function (item) {
+    return new State(items - item, used);
+  }
+  this.markAsUsed = function () {
+    return new State(items, true);
+  }
+}
+
 function handleEvent(event) {
-  var receiptId = event.receiptId
-  var state = storage.get("suggestion-process-"+receiptId)
+  var receiptId = event.receiptId;
+  var state = storage.get("suggestion-process-"+receiptId) ?: new State([], false);
   var newState = processEvent(event, state)
   storage.set("suggestion-process-"+receiptId, newState)
 }
@@ -28,7 +43,7 @@ function processEvent(event, state) {
     case 'evo.receipt.opened':
       return state
     case 'evo.receipt.productAdded':
-      if (state.finished) {
+      if (state.isUsed) {
         return state;
       } else {
         var nextState = state.addItem(event.productId)
