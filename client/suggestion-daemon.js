@@ -8,7 +8,9 @@ function handleEvent(event) {
   var newState = processEvent(event, state)
   storage.set("suggestion-process-"+receiptId, newState)
 }
-
+/*
+  Возвращает массив строковых идентификаторов предложенных товаров
+*/
 function generateSuggestions(receiptId, items) {
   var response = http.send({
     method : "POST",
