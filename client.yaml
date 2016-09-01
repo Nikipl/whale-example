@@ -16,15 +16,14 @@ daemons:
       - app.suggestion.used
     behavior: suggestion-daemon.js
 
-ui-plugins:
+plugins:
   - name: suggestion
     moment: evo.receipt.items.fixed
     point: before
     behavior: before-receipt-fixed.js
 
 views:
-  - name: suggestions
-    dir: suggestion-list # базовая директория
+  - name: suggestion-list
     source: view.html
     scripts: # список скриптов которые должны быть подключены
       - suggestion-list-view.js
