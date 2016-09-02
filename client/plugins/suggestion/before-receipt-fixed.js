@@ -3,7 +3,7 @@ var inventory = require('inventory')
 
 function handleMoment(context, navigation) {
   var receipt = context.receipt
-  var suggestions = storage.get("receipt-suggestions-"+receipt.id)
+  var suggestions = JSON.parse(storage.get("receipt-suggestions-"+receipt.id));
   var suggestedProducts =
     suggestions
     .map(productId => inventory.getProduct(productId))
