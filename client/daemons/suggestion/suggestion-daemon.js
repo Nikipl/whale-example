@@ -2,6 +2,15 @@ var storage = require('storage');
 var inventory = require('inventory');
 var http = require('http');
 
+var StateFactory = {
+  initialState: function () {
+    return new State([], false);
+  },
+  fromJson: function (json) {
+    var data = JSON.parse(json);
+    return new State(data.items, data.used);
+  }
+}
 
 function State(items, used) {
   this.items = items
@@ -26,14 +35,22 @@ function State(items, used) {
   this.markAsUsed = function () {
     return new State(items, true);
   }
+  this.toJson = function () {
+    return JSON.stringify({
+      items: items,
+      used: used
+    });
+  }
 }
 
 function handleEvent(event) {
   var receiptId = event.receiptId;
-  var savedState = storage.get("suggestion-process-"+receiptId);
-  var state = savedState || new State([], false);
+  var savedData = storage.get("suggestion-process-"+receiptId);
+  var state = (function () {
+    return savedData ? StateFactory.fromJson(savedData) : StateFactory.initialState();
+  })();
   var newState = processEvent(event, state)
-  storage.set("suggestion-process-"+receiptId, newState)
+  storage.set("suggestion-process-"+receiptId, newState.toJson());
 }
 /*
   Возвращает массив строковых идентификаторов предложенных товаров
