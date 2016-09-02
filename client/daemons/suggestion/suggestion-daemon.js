@@ -4,13 +4,24 @@ var http = require('http');
 
 
 function State(items, used) {
-  this.getItems = items
+  this.items = items
   this.isUsed = used
+
   this.addItem = function (item) {
-    return new State(items + item, used);
+    return new State(items.concat([item]), used);
   }
   this.removeItem = function (item) {
-    return new State(items - item, used);
+    var index = items.indexOf(item);
+    var newItems = (function () {
+      if (index > -1) {
+        var itemsCopy = items.slice(0);
+        itemsCopy.splice(index, 1);
+        return itemsCopy;
+      } else {
+        return items;
+      }
+    })();
+    return new State(newItems, used);
   }
   this.markAsUsed = function () {
     return new State(items, true);
@@ -42,27 +53,27 @@ function generateSuggestions(receiptId, items) {
 function processEvent(event, state) {
   switch (event.type) {
     case 'evo.receipt.opened':
-      return state
+      return state;
     case 'evo.receipt.productAdded':
       if (state.isUsed) {
         return state;
       } else {
-        var nextState = state.addItem(event.productId)
+        var nextState = state.addItem(event.productId);
         var suggestions = generateSuggestions(event.receiptId, nextState.items);
-        storage.set("receipt-suggestions-"+event.receiptId, suggestions)
+        storage.set("receipt-suggestions-"+event.receiptId, suggestions);
         return nextState;
       }
     case 'evo.receipt.productRemoved':
-      if (state.finished) {
+      if (state.isUsed) {
         return state;
       } else {
-        var nextState = state.removeItem(event.productId)
+        var nextState = state.removeItem(event.productId);
         var suggestions = generateSuggestions(event.receiptId, nextState.items);
-        storage.set("receipt-suggestions-"+event.receiptId, suggestions)
-        return nextState
+        storage.set("receipt-suggestions-"+event.receiptId, suggestions);
+        return nextState;
       }
     case 'app.suggestion.used':
-      return state.markAsUsed;
+      return state.markAsUsed();
     case 'evo.receipt.closed':
       http.send({
         method : "POST",
