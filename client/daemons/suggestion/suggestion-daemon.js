@@ -13,12 +13,15 @@ var StateFactory = {
 }
 
 function State(items, used) {
+
   this.items = items
+
   this.isUsed = used
 
   this.addItem = function (item) {
     return new State(items.concat([item]), used);
   }
+
   this.removeItem = function (item) {
     var index = items.indexOf(item);
     var newItems = (function () {
@@ -32,9 +35,11 @@ function State(items, used) {
     })();
     return new State(newItems, used);
   }
+
   this.markAsUsed = function () {
     return new State(items, true);
   }
+
   this.toJson = function () {
     return JSON.stringify({
       items: items,
@@ -59,12 +64,9 @@ function generateSuggestions(receiptId, items) {
   var response = http.send({
     method : "POST",
     path : "suggestions",
-    body : {
-      receiptId : receiptId,
-      items: items
-    }
+    body : items
   })
-  return response.body;
+  return response.body.products;
 }
 
 function processEvent(event, state) {
@@ -77,7 +79,7 @@ function processEvent(event, state) {
       } else {
         var nextState = state.addItem(event.productId);
         var suggestions = generateSuggestions(event.receiptId, nextState.items);
-        storage.set("receipt-suggestions-"+event.receiptId, suggestions);
+        storage.set("receipt-suggestions-"+event.receiptId, Json.stringify(suggestions));
         return nextState;
       }
     case 'evo.receipt.productRemoved':
@@ -86,7 +88,7 @@ function processEvent(event, state) {
       } else {
         var nextState = state.removeItem(event.productId);
         var suggestions = generateSuggestions(event.receiptId, nextState.items);
-        storage.set("receipt-suggestions-"+event.receiptId, suggestions);
+        storage.set("receipt-suggestions-"+event.receiptId, JSON.stringify(suggestions));
         return nextState;
       }
     case 'app.suggestion.used':
