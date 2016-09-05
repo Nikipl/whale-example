@@ -63,7 +63,7 @@ function handleEvent(event) {
 function generateSuggestions(receiptId, items) {
   var response = http.send({
     method : "POST",
-    path : "suggestions",
+    path : "recommendations",
     body : items
   })
   return response.body.products;
