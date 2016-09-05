@@ -9,12 +9,12 @@ function handleMoment(context, navigation) {
     .map(productId => inventory.getProduct(productId))
     .filter(p => p.isAvailable)
 
-  if (products.length > 0) {
+  if (suggestedProducts.length() > 0) {
     navigation.pushView("suggestion-list", {
       suggestions: suggestedProducts,
       receipt: receipt
     })
   } else {
-    navigation.pushNext
+    navigation.pushNext();
   }
 }
