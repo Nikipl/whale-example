@@ -1,6 +1,7 @@
 var storage = require('storage');
 var inventory = require('inventory');
 var http = require('http');
+var log = require('logger')
 
 var StateFactory = {
   initialState: function () {
@@ -66,7 +67,9 @@ function generateSuggestions(receiptId, items) {
     path : "recommendations",
     body : items
   })
-  return response.body.products;
+  var jsonObject = JSON.parse(response)
+  log.log("Response " + response)
+  return jsonObject.body.products;
 }
 
 function processEvent(event, state) {
@@ -77,16 +80,18 @@ function processEvent(event, state) {
       if (state.isUsed) {
         return state;
       } else {
-        var nextState = state.addItem(event.productId);
+        log.log("I'm here");
+        var nextState = state.addItem(event.productUID);
         var suggestions = generateSuggestions(event.receiptId, nextState.items);
-        storage.set("receipt-suggestions-"+event.receiptId, Json.stringify(suggestions));
+        log.log(JSON.stringify(suggestions))
+        storage.set("receipt-suggestions-"+event.receiptId, JSON.stringify(suggestions));
         return nextState;
       }
     case 'evo.receipt.productRemoved':
       if (state.isUsed) {
         return state;
       } else {
-        var nextState = state.removeItem(event.productId);
+        var nextState = state.removeItem(event.productUID);
         var suggestions = generateSuggestions(event.receiptId, nextState.items);
         storage.set("receipt-suggestions-"+event.receiptId, JSON.stringify(suggestions));
         return nextState;
