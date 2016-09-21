@@ -95,7 +95,8 @@ window.onload = function() {
       }
       root.appendChild(next_button);
     }
-    var receipt = context.data.receipt;
+
+    var receipt = context.receipts.getById(context.data.receiptId);
     var listeners = {
       buttonIncDecr : function(evt) {
         var target = evt.currentTarget;
