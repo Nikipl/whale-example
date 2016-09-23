@@ -68,6 +68,10 @@ window.onload = function() {
         decr_button.actionType = 'remove';
         decr_button.addEventListener('click', listeners.buttonIncDecr, false);
 
+        counter = misc.createElem('span', 'product__counter', '0');
+
+        price = misc.createElem('span', 'product__price', prod.price);
+
         incr_button = misc.createElem('span', 'product__button add listened-button', '+');
         incr_button.productId = prod.id;
         incr_button.actionType = 'add';
@@ -88,8 +92,10 @@ window.onload = function() {
         })(prod, incr_button, decr_button);
 
         buttons_container.appendChild(decr_button);
+        buttons_container.appendChild(counter);
         buttons_container.appendChild(incr_button);
         a.appendChild(text);
+        a.appendChild(price);
         a.appendChild(buttons_container);
         container.appendChild(a);
       }

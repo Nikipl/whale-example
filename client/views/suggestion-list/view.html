@@ -3,43 +3,66 @@
   <head>
     <script type="text/javascript">
       var context = { // этот объект генерится из Java
+        receipts : {
+          getById : function() {
+            return {
+              products : {
+                'ytrxv-dfdg4-kjh' : 1,
+                'poiml-79kjh-rys' : 1,
+                'hyt9c-gfsfd-iuo' : 1,
+                'cvxxv-jgwf6-7fh' : 2,
+              },
+              add : function(id) {
+                this.products[id] = this.products[id] || 0;
+                this.products[id]++;
+              },
+              remove : function(id) {
+                this.products[id]--;
+                if (this.products[id] <= 0) {
+                delete this.products[id];
+                }
+              }
+            }
+          }
+        },
         data: { // данные которые были переданы при вызове метода navigation.push
-          receipt: function {
-            this.products = {
+          receipt: {
+            products : {
               'ytrxv-dfdg4-kjh' : 1,
               'poiml-79kjh-rys' : 1,
               'hyt9c-gfsfd-iuo' : 1,
               'cvxxv-jgwf6-7fh' : 2,
-            };
-            this.add = function(id) {
+            },
+            add : function(id) {
               this.products[id] = this.products[id] || 0;
               this.products[id]++;
-            };
-            this.remove = function(id) {
+            },
+            remove : function(id) {
               this.products[id]--;
               if (this.products[id] <= 0) {
               delete this.products[id];
               }
-            };
+            }
           },
           suggestions: [
-            { id : 'chesnochek', name : 'Чесночек' },
-            { id : 'hlebywek', name : 'Хлебушек' },
-            { id : 'ogur4iki', name : 'Соленые огурчики' },
-            { id : 'saltce', name : 'Сало' }
+            { id : 'chesnochek', name : 'Чесночек', price: 1000.00},
+            { id : 'hlebywek', name : 'Хлебушек', price: 21111.00},
+            { id : 'ogur4iki', name : 'Соленые огурчики', price: 3000.50},
+            { id : 'saltce', name : 'Сало', price: 400.20}
           ]
         },
-        navigation = { // класс для работы с навигацией
+        navigation : { // класс для работы с навигацией
           pushNext: function() {}
         }
       }
     </script>
 
     <!-- Это вставляется исходя из манифетса -->
-    <script type="text/javascript" src="suggestion-list-view.js" />
+    <script type="text/javascript" src="suggestion-list-view.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600&subset=latin,cyrillic" rel="stylesheet" type="text/css">
 
     <!-- Это вставляется исходя из манифетса -->
-    <link rel="stylesheet" type="text/css" href="suggestion-list-view.css">
+    <link rel="stylesheet" type="text/css" href="builded/suggestion-list-view.css">
   </head>
   <body>
     <div id="root"></div> <!-- Этот div предоставляют партнеры-->

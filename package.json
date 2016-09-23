@@ -1,0 +1,24 @@
+{
+  "name": "whale-example",
+  "version": "1.0.0",
+  "description": "[![Gitter](https://badges.gitter.im/evotor/whale-example.svg)](https://gitter.im/evotor/whale-example?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evotor/whale-example.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evotor/whale-example/issues"
+  },
+  "homepage": "https://github.com/evotor/whale-example#readme",
+  "dependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2"
+  }
+}
