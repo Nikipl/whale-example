@@ -5,6 +5,9 @@ html, body {
   html *, body * {
     font-family: "Roboto", sans-serif; }
 
+body {
+  margin-bottom: -152px; }
+
 .title {
   font-size: 20px;
   font-weight: 600; }
@@ -12,70 +15,81 @@ html, body {
 .container {
   background: #f1f1f1;
   border-radius: 4px; }
+  .container .each-product {
+    border-bottom: 1px solid #3C3C46;
+    overflow: hidden;
+    height: 114px;
+    background: #1f1e1c;
+    color: white;
+    position: relative;
+    padding: 20px; }
+    .container .each-product .product__title {
+      font-size: 24px;
+      font-weight: 500;
+      display: inline-block;
+      overflow: hidden;
+      width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap; }
+    .container .each-product .product__price {
+      position: absolute;
+      bottom: 28px;
+      left: 20px;
+      font-size: 30px; }
+    .container .each-product .product__buttons-container {
+      position: absolute;
+      bottom: 20px;
+      right: 20px; }
+      .container .each-product .product__buttons-container .product__counter {
+        font-size: 30px;
+        padding: 0 40px;
+        position: relative;
+        top: 10px; }
+      .container .each-product .product__buttons-container .product__button {
+        cursor: pointer;
+        text-align: center; }
+        .container .each-product .product__buttons-container .product__button.add {
+          content: '';
+          background-image: url("../assets/incr.svg");
+          width: 54px;
+          height: 54px;
+          float: right; }
+        .container .each-product .product__buttons-container .product__button.remove {
+          content: '';
+          background-image: url("../assets/decr.svg");
+          width: 54px;
+          height: 54px;
+          float: left; }
 
-.container .each-product {
-  border-bottom: 1px solid #3C3C46;
-  overflow: hidden;
-  height: 114px;
-  background: #1f1e1c;
-  color: white;
-  position: relative;
-  padding: 20px; }
-
-.container .each-product .product__title {
-  font-size: 24px;
-  font-weight: 500;
-  padding: 10px 15px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap; }
-
-.container .each-product .product__price {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  font-size: 30px; }
-
-.container .each-product .product__buttons-container {
-  position: absolute;
-  bottom: 20px;
-  right: 20px; }
-
-.container .each-product .product__buttons-container .product__counter {
-  font-size: 30px;
-  padding: 0 40px;
-  position: relative;
-  top: 10px; }
-
-.container .each-product .product__buttons-container .product__button {
-  cursor: pointer;
-  text-align: center; }
-  .container .each-product .product__buttons-container .product__button.add {
-    content: '';
-    background-image: url("../assets/incr.svg");
-    width: 54px;
-    height: 54px;
-    float: right; }
-  .container .each-product .product__buttons-container .product__button.remove {
-    content: '';
-    background-image: url("../assets/decr.svg");
-    width: 54px;
-    height: 54px;
-    float: left; }
+.inactive {
+  opacity: 0.5;
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  /* Likely future */ }
 
 .next-button {
+  position: relative;
   height: 108px;
   padding: 0 20px;
-  margin-top: 25px;
-  font-size: 14px;
-  border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
   outline: none;
   cursor: pointer;
+  text-align: left;
   background: #67a420;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
+  border: none;
+  font-size: 30px;
   color: white; }
+  .next-button .final-price {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 48px; }

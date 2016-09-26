@@ -42,6 +42,9 @@ misc = {
       el.innerText = text || '';
       return el;
   },
+  makePrice : function(price) {
+    return price + ' ₽';
+  }
 };
 
 window.onload = function() {
@@ -63,12 +66,12 @@ window.onload = function() {
         text = misc.createElem('span', 'product__title', prod.name);
         buttons_container = misc.createElem('span', 'product__buttons-container');
 
-        decr_button = misc.createElem('span', 'product__button remove listened-button hidden', '-');
+        decr_button = misc.createElem('span', 'product__button remove listened-button inactive', '-');
         decr_button.productId = prod.id;
         decr_button.actionType = 'remove';
         decr_button.addEventListener('click', listeners.buttonIncDecr, false);
 
-        counter = misc.createElem('span', 'product__counter', '0');
+        counter = misc.createElem('span', 'product__counter inactive', '0');
 
         price = misc.createElem('span', 'product__price', prod.price);
 
@@ -77,19 +80,23 @@ window.onload = function() {
         incr_button.actionType = 'add';
         incr_button.addEventListener('click', listeners.buttonIncDecr, false);
 
-        next_button = misc.createElem('button', 'next-button', 'Продолжить');
+        next_button = misc.createElem('button', 'next-button', 'Итого');
         next_button.addEventListener('click', listeners.buttonNext, false);
 
-
-        (function(prod, inc_button, decr_button) {
-            eventsService.subscribe(prod.id, function(value) {
-              if (!value || value <= 0) {
-                  decr_button.className += decr_button.className + ' hidden';
-              } else {
-                  decr_button.className = decr_button.className.replace(' hidden', '');
-              }
-            }, true);
-        })(prod, incr_button, decr_button);
+        (function(prod, inc_button, decr_button, counter) {
+          eventsService.subscribe(prod.id, function(value) {
+            if (!value || value <= 0) {
+                if (decr_button.className.match('inactive')) return;
+                decr_button.className += ' inactive';
+                counter.innerText = 0;
+                counter.className = counter.className += ' inactive';
+            } else {
+                decr_button.className = decr_button.className.replace(' inactive', '');
+                counter.innerText = value || 0;
+                counter.className = counter.className.replace(' inactive', '');
+            }
+          }, true);
+        })(prod, incr_button, decr_button, counter);
 
         buttons_container.appendChild(decr_button);
         buttons_container.appendChild(counter);
@@ -99,7 +106,21 @@ window.onload = function() {
         a.appendChild(buttons_container);
         container.appendChild(a);
       }
+
+      final_price = misc.createElem('span', 'final-price', misc.makePrice(0));
+
       root.appendChild(next_button);
+      next_button.appendChild(final_price);
+
+      eventsService.subscribe('change', function() {
+            var _final_price = 0;
+            for (var i in suggestedProducts) {
+              if (receipt.products[suggestedProducts[i].id]) {
+                _final_price += suggestedProducts[i].price * receipt.products[suggestedProducts[i].id];
+              }
+            }
+            final_price.innerText = misc.makePrice(_final_price);
+      }, true);
     }
 
     var receipt = context.receipts.getById(context.data.receiptId);
@@ -108,6 +129,7 @@ window.onload = function() {
         var target = evt.currentTarget;
         receipt[target.actionType](target.productId);
         eventsService.set(target.productId, receipt.products[target.productId]);
+        eventsService.set('change', true);
       },
       buttonNext : function() {
         console.log(receipt);
