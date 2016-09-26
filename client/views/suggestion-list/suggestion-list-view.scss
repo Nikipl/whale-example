@@ -17,7 +17,14 @@ html, body {
 	background: $background;
 	* {
 		font-family: $font, sans-serif-medium, sans-serif;
-		font-weight: 500;	
+		font-weight: 500;
+		 cursor: default;
+	    -webkit-touch-callout: none;
+	    -webkit-user-select: none;
+	    -khtml-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
 	}
 }
 
@@ -60,38 +67,45 @@ body {
 		}
 		.product__buttons-container {
 			position: absolute;
-			bottom: $padding;
-			right: $padding;
+			bottom: 0;
+			right: 0;
 
 			.product__counter {
 				font-size: $counter-font-size;
-				padding: 0 30px;
+				padding: 0 10px;
 				position: relative;
-				top: 6px;
+				top: 24px;
 			}
 			.product__button {
 				cursor: pointer;
 				text-align: center;
 				font-size: 0;
 				-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+				background-size: 45%;
+			    background-position: 20px;
+			    background-repeat: no-repeat;
+			    padding: 20px;
+				content : '';
+				width: $buttons-size;
+				height: $buttons-size;
+
+				-webkit-touch-callout: all;
+			    -webkit-user-select: all;
+			    -khtml-user-select: all;
+			    -moz-user-select: all;
+			    -ms-user-select: all;
+			    user-select: all;
+
 				&:active, &:focus {
 					outline: none !important;
 					border: none !important;
 				}
 				&.add {
-					content : '';
 					background-image: url('../assets/incr.svg');
-					background-size: cover;
-					width: $buttons-size;
-					height: $buttons-size;
 					float: right;
 				}
 				&.remove {
-					content : '';
 					background-image: url('../assets/decr.svg');
-					background-size: cover;
-					width: $buttons-size;
-					height: $buttons-size;
 					float: left;
 				}
 			}
@@ -110,6 +124,7 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 	text-transform: uppercase;
 	width: 100%;
 	border: none;
@@ -119,8 +134,6 @@ body {
 	.final-price {
 		position: relative;
 		float: right;
-		// bottom: 20px;
-		// right: 20px;
 		top: -5px;
 		font-size: $price-font-size;
 	}

@@ -42,8 +42,13 @@ misc = {
       el.innerText = text || '';
       return el;
   },
+  numberWithSpaces : function(x) {
+    var parts = x.toFixed(2).toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return parts.join(".");
+  }, 
   makePrice : function(price) {
-    return price.toFixed(2) + ' ₽';
+    return misc.numberWithSpaces(price) + ' ₽';
   }
 };
 
@@ -73,7 +78,7 @@ window.onload = function() {
 
         counter = misc.createElem('span', 'product__counter inactive', '0');
 
-        price = misc.createElem('span', 'product__price', prod.price.toFixed(2));
+        price = misc.createElem('span', 'product__price', misc.numberWithSpaces(prod.price));
 
         incr_button = misc.createElem('span', 'product__button add listened-button', '+');
         incr_button.productId = prod.id;
