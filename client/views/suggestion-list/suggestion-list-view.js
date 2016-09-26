@@ -85,7 +85,7 @@ window.onload = function() {
         incr_button.actionType = 'add';
         incr_button.addEventListener('click', listeners.buttonIncDecr, false);
 
-        next_button = misc.createElem('button', 'next-button', 'Итого');
+        next_button = misc.createElem('button', 'next-button', 'К оплате');
         next_button.addEventListener('click', listeners.buttonNext, false);
 
         (function(prod, inc_button, decr_button, counter) {
