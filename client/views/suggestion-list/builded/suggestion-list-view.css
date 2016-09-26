@@ -19,13 +19,13 @@ body {
   .container .each-product {
     border-bottom: 1px solid #3C3C46;
     overflow: hidden;
-    height: 70px;
+    height: 80px;
     background: #1f1e1c;
     color: white;
     position: relative;
     padding: 15px; }
     .container .each-product .product__title {
-      font-size: 16px;
+      font-size: 18px;
       display: inline-block;
       overflow: hidden;
       width: 100%;
@@ -37,33 +37,37 @@ body {
       position: absolute;
       bottom: 15px;
       left: 15px;
-      font-size: 20px; }
+      font-size: 22px; }
     .container .each-product .product__buttons-container {
       position: absolute;
       bottom: 15px;
       right: 15px; }
       .container .each-product .product__buttons-container .product__counter {
-        font-size: 20px;
+        font-size: 22px;
         padding: 0 30px;
         position: relative;
-        top: 3px; }
+        top: 6px; }
       .container .each-product .product__buttons-container .product__button {
         cursor: pointer;
         text-align: center;
-        font-size: 0; }
+        font-size: 0;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0); }
+        .container .each-product .product__buttons-container .product__button:active, .container .each-product .product__buttons-container .product__button:focus {
+          outline: none !important;
+          border: none !important; }
         .container .each-product .product__buttons-container .product__button.add {
           content: '';
           background-image: url("../assets/incr.svg");
           background-size: cover;
-          width: 30px;
-          height: 30px;
+          width: 35px;
+          height: 35px;
           float: right; }
         .container .each-product .product__buttons-container .product__button.remove {
           content: '';
           background-image: url("../assets/decr.svg");
           background-size: cover;
-          width: 30px;
-          height: 30px;
+          width: 35px;
+          height: 35px;
           float: left; }
 
 .next-button {
@@ -78,13 +82,17 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
+  text-transform: uppercase;
   width: 100%;
   border: none;
-  font-size: 20px;
+  padding-top: 8px;
+  font-size: 22px;
   color: white; }
   .next-button .final-price {
+    position: relative;
     float: right;
-    font-size: 20px; }
+    top: -5px;
+    font-size: 28px; }
 
 .inactive {
   opacity: 0.5;

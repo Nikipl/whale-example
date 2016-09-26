@@ -43,7 +43,7 @@ misc = {
       return el;
   },
   makePrice : function(price) {
-    return price + ' ₽';
+    return price.toFixed(2) + ' ₽';
   }
 };
 
@@ -73,7 +73,7 @@ window.onload = function() {
 
         counter = misc.createElem('span', 'product__counter inactive', '0');
 
-        price = misc.createElem('span', 'product__price', prod.price);
+        price = misc.createElem('span', 'product__price', prod.price.toFixed(2));
 
         incr_button = misc.createElem('span', 'product__button add listened-button', '+');
         incr_button.productId = prod.id;

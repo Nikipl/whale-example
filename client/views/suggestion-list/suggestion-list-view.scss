@@ -3,12 +3,13 @@ $item-background : #1f1e1c;
 $green : #67a420;
 $font : 'Roboto';
 
-$panel-height : 70px;
-$title-font-size : 16px;
-$buttons-size: 30px;
-$counter-font-size: 20px;
+$panel-height : 80px;
+$title-font-size : 18px;
+$buttons-size: 35px;
+$counter-font-size: 22px;
 $padding: 15px;
 $next-button-height: 80px;
+$price-font-size: 28px;
 
 html, body {
 	padding: 0;
@@ -66,12 +67,17 @@ body {
 				font-size: $counter-font-size;
 				padding: 0 30px;
 				position: relative;
-				top: 3px;
+				top: 6px;
 			}
 			.product__button {
 				cursor: pointer;
 				text-align: center;
 				font-size: 0;
+				-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+				&:active, &:focus {
+					outline: none !important;
+					border: none !important;
+				}
 				&.add {
 					content : '';
 					background-image: url('../assets/incr.svg');
@@ -104,16 +110,19 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
+	text-transform: uppercase;
 	width: 100%;
 	border: none;
+	padding-top: 8px;
 	font-size: $counter-font-size;
 	color: white;
 	.final-price {
-		// position: absolute;
+		position: relative;
 		float: right;
 		// bottom: 20px;
 		// right: 20px;
-		font-size: $counter-font-size;
+		top: -5px;
+		font-size: $price-font-size;
 	}
 }
 
