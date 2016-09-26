@@ -3,7 +3,7 @@ html, body {
   margin: 0;
   background: #3C3C46; }
   html *, body * {
-    font-family: "Roboto", sans-serif; }
+    font-family: "Roboto", sans-serif-medium, sans-serif; }
 
 body {
   margin-bottom: -152px; }
@@ -30,7 +30,8 @@ body {
       overflow: hidden;
       width: 100%;
       text-overflow: ellipsis;
-      white-space: nowrap; }
+      white-space: nowrap;
+      font-family: "Roboto", sans-serif !important; }
     .container .each-product .product__price {
       position: absolute;
       bottom: 28px;

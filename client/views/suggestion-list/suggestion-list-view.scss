@@ -8,7 +8,7 @@ html, body {
 	margin: 0;
 	background: $background;
 	* {
-		font-family: $font, sans-serif;
+		font-family: $font, sans-serif-medium, sans-serif;
 	}
 }
 
@@ -41,6 +41,7 @@ body {
 			width: 100%;
 			text-overflow: ellipsis;
 			white-space: nowrap;
+			font-family: $font, sans-serif !important;
 		}
 		.product__price {
 			position: absolute;
