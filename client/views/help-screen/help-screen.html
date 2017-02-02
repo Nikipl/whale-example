@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Help Screen</title>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="help-screen.js"></script>
+	<link rel="stylesheet" href="builded/help-screen.css">
+</head>
+<body>
+
+	<div id="preload" class="view preload show">
+		<img class="loading" src="assets/loading.gif">
+		<p>Соединяем...</p>
+	</div>
+
+	<div id="preload_error" class=" view preload_error">
+		<img src="assets/no connection.svg">
+		<p class="mini no-margin">Проверьте соединение с&nbsp;интернетом и&nbsp;нажмите «Повторить»</p>
+		<button class="small" id="preload_error_resend">Повторить</button>
+	</div>
+
+	<div id="form" class="view form">
+		<p class=h1>Эл. почта помощника</p>
+		<form id="submit_form">
+			<div class="form-group">
+				<input name="email" id="email" type="text">
+				<p class="base-text under-input-field mini no-margin show">На этот адрес мы отправим ссылку для удаленного доступа к кассе</p>
+				<p class="under-input-field mini no-margin error" id="no_connection">Проверьте соединение с&nbsp;интернетом и&nbsp;попробуйте еще раз</p>
+				<p class="under-input-field mini no-margin error" id="wrong_email">Проверьте адрес почты, с&nbsp;ним что-то не&nbsp;так</p>
+			</div>
+			<div class="form-group">
+				<button id="form_button" class="send full">Запросить помощь</button>
+			</div>
+		</form>
+	</div>
+
+	<div id="success" class="view view-success success">
+		<img src="assets/success.svg">
+		<p class="h1">Готово!</p>
+		<p class="mini">Помощник получит письмо со&nbsp;ссылкой и&nbsp;сможет удаленно управлять вашей кассой</p>
+		<button id="success_close" class="full">Закрыть</button>
+	</div>
+	
+</body>
+</html>

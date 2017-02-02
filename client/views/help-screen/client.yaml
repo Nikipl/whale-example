@@ -1,0 +1,20 @@
+version: 1
+versionName: "1.0.2"
+
+packageName: vnc
+appName: "VNC"
+appUUID: "919b31d4-84e2-436f-a780-57b61e2e1acf"
+
+capabilities:
+  - navigation
+  - storage
+  - http
+  
+views:
+  - name: help-screen
+    header: "Запросить помощь"
+    source: client/views/help-screen/help-screen.html
+    scripts: # список скриптов которые должны быть подключены
+      - help-screen.js
+    styles: # список стилей которые должны быть подключены
+      - "*.css" # может подключить все файлы

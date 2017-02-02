@@ -1,0 +1,128 @@
+$green : #67a420;
+$error : #cb2324;
+
+html {
+	font-family: 'Roboto', 'Arial', sans-serif;
+	// zoom: 1.9;
+	zoom: 0.75;
+}
+html, body {
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	// padding-top: 50px;
+}
+p {
+	font-size: 26px;
+	color: #212121;
+}
+.h1 {
+	font-size: 36px !important;
+	font-weight: 500;
+	margin: 10px 0 20px 0;
+}
+.mini {
+	font-size: 18px !important;
+	color: #727272;
+	margin-bottom: 40px;
+	&.no-margin {
+		margin-bottom: 20px;
+	}
+}
+.error {
+	color: $error;
+}
+
+.loading {
+	width: 70px;
+}
+.under-input-field {
+	margin-top: 10px;
+	display: none;
+	&.show {
+		display: inline-block;
+	}
+}
+
+.view {
+	display: none;
+	padding: 36px 48px;
+	&.show {
+		display: block;
+	}
+
+	&#preload, &#preload_error, &#success {
+		padding-top: 200px;
+		img {
+			// margin-bottom: 10px;
+		}
+	}
+
+	&#form {
+		text-align: left;
+		.form-group {
+			padding: 10px 0;
+			input {
+				width: 100%;
+				height: 46px;
+				font-size: 26px;
+				position: relative;
+				outline : none;
+				border: none;
+				border-bottom: 2px solid $green;
+				&.invalid {
+					animation : invalid .5s;
+					-webkit-animation : invalid .5s;
+					border-bottom-color: $error;
+				}
+			}
+		}
+	}
+	button {
+		margin-top: 10px;
+		padding: 20px 30px;
+		background: $green;
+		color: white;
+		font-size: 21px;
+		border: 0 !important;
+		outline: none !important;
+		text-transform: uppercase;
+		letter-spacing: 1.4px;
+		border-radius: 50px;
+		cursor: pointer;
+		&.full {
+			width: 100%;
+		}
+		&.mini-button {
+			width: 50%;
+		}
+		&.small {
+			padding: 16px 30px;
+			font-size: 16px;
+		}
+		&:active, &:focus {
+			user-select: none;
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			outline: none !important;
+			border: 0 !important;
+			-webkit-tap-highlight-color: transparent;
+		}
+	}
+}
+
+@keyframes invalid {
+	0% {left:8px;}
+	10% {left:-8px;}
+	30% {left:8px;}
+	60% {left:-8px;}
+	100% {left:0px;}
+}
+
+@-webkit-keyframes invalid {
+	0% {left:8px;}
+	10% {left:-8px;}
+	30% {left:8px;}
+	60% {left:-8px;}
+	100% {left:0px;}
+}
